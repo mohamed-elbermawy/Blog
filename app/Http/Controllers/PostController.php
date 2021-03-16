@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Http\Requests\StorePostRequest;
@@ -77,10 +78,10 @@ class PostController extends Controller
         ]);
     }
 
-    public function update($post, StorePostRequest $myRequestObject)
+    public function update($post, UpdatePostRequest $myRequestObject)
     {
          $data = $myRequestObject->all();
-        $data = $myRequestObject->validated();
+//        $data = $myRequestObject->validated();
 //        Validator::make($data, [
 //            'title' => [
 //                'required',
