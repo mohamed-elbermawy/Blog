@@ -11,6 +11,7 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">title</th>
+          <th scope="col">slug</th>
         <th scope="col">posted by</th>
         <th scope="col">created at</th>
         <th scope="col">actions</th>
@@ -21,15 +22,15 @@
       <tr>
         <th scope="row">{{$post->id}}</th>
         <td>{{$post->title}}</td>
+          <td>{{$post->slug}}</td>
         <td>{{$post->user ? $post->user->name : 'user not found'}}</td>
         <td>{{$post->created_at->format('Y-m-d')}}</td>
         <td class="col" style="display: flex;">
           <a href="{{ route('posts.show', [ 'post' => $post['id'] ]) }}" class="btn btn-info" style="margin-right: 5px;">View</a>
-          <a href="{{route('posts.edit', ['post' => $post['id'] ])}}" class="btn btn-primary">Edit</a>
-          <!-- <a href="#" class="btn btn-danger">Delete</a> -->
+          <a href="{{route('posts.edit', ['post' => $post['id'] ])}}" class="btn btn-primary mr-1">Edit</a>
           <form method="post" action="{{route('posts.destroy' , ['post'=>$post['id']])}}">
             @csrf
-            {{ method_field('DELETE') }}‏
+            {{ method_field('DELETE') }}
             <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure ?')">
           </form>
         </td>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Http\Requests\UpdatePostRequest;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Http\Requests\StorePostRequest;
@@ -14,7 +15,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::paginate(10);
+        $posts = Post::paginate(5);
         // $dt = Carbon::parse($post['cerated_at'],'UTC');
         // $format2 = $dt->isoFormat('YY-M-D');
         return view('posts.index', [
@@ -45,29 +46,39 @@ class PostController extends Controller
 
     public function store(StorePostRequest $myRequestObject)
     {
-        $data = $myRequestObject->validated();
+//        dd($myRequestObject->user_id);
+
+        if($myRequestObject->validated()) {
+            $data = $myRequestObject->toArray();
+//            dd($data->user_id);
+//            dd($data->user_id);
+//        $post = new Post();
+//        $post->title = $myRequestObject->title;
+//        $post->slug = SlugService::createSlug(Post::class , 'slug',$myRequestObject->title);
+
 //        $data = $validatedDate->all();
-        //$data = request()->all();
-        // request()->title == $data['title']
+            //$data = request()->all();
+            // request()->title == $data['title']
 
-        Post::create($data);
+            Post::create($data);
 
-        // Post::create($myRequestObject->all());
+            // Post::create($myRequestObject->all());
 
-        // Post::create([
-        //     'title' => $data['title'],
-        //     'description' => $data['description'],
-        //     'id' => 1, //those will be ignore cause they aren't in fillable
-        //     'ajsnhdoiqwjsd' => 'aikoshdiahsdui' //those will be ignore cause they aren't in fillable
-        // ]);
+            // Post::create([
+            //     'title' => $data['title'],
+            //     'description' => $data['description'],
+            //     'id' => 1, //those will be ignore cause they aren't in fillable
+            //     'ajsnhdoiqwjsd' => 'aikoshdiahsdui' //those will be ignore cause they aren't in fillable
+            // ]);
 
-        //with this syntax you don't need fillable
-        // $post = new Post;
-        // $post->title = $data['title'];
-        // $post->description = $data['description'];
-        // $post->save();
+            //with this syntax you don't need fillable
+            // $post = new Post;
+            // $post->title = $data['title'];
+            // $post->description = $data['description'];
+            // $post->save();
 
-        return redirect()->route('posts.index');
+            return redirect()->route('posts.index');
+        }
     }
 
     public function edit($post)
