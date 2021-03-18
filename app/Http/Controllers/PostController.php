@@ -52,9 +52,10 @@ class PostController extends Controller
             $data = $myRequestObject->toArray();
 //            dd($data->user_id);
 //            dd($data->user_id);
-//        $post = new Post();
-//        $post->title = $myRequestObject->title;
-//        $post->slug = SlugService::createSlug(Post::class , 'slug',$myRequestObject->title);
+        $post = new Post();
+        $title = $myRequestObject->title;
+
+        $post->slug = SlugService::createSlug(Post::class , 'slug',$myRequestObject->title);
 
 //        $data = $validatedDate->all();
             //$data = request()->all();
