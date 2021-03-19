@@ -35,7 +35,12 @@ Route::get('/auth/redirect', function () {
 });
 
 Route::get('/auth/callback', function () {
-    $user = Socialite::driver('github')->user();
+       $user = Socialite::driver('github')->user();
+//     dd($user);
+//     $data = new User;
+//     $data->name = $user->name;
+//     $data->email = $user->email;
+//     $data->save();
 
     // $user->token
 });
